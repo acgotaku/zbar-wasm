@@ -48,7 +48,7 @@ $(ZBAR_SRC)/Makefile: $(ZBAR_SRC)/configure
 		--without-xv --without-jpeg --without-libiconv-prefix \
 		--without-imagemagick --without-npapi --without-gtk \
 		--without-python --without-qt --without-xshm --disable-video \
-		--disable-pthread --disable-assert --host=arm
+		--disable-pthread --disable-assert
 
 $(ZBAR_SRC)/configure: $(ZBAR_SRC).tar.gz
 	tar zxvf $(ZBAR_SRC).tar.gz

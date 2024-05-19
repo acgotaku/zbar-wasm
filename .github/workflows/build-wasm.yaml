@@ -1,0 +1,46 @@
+name: Build WASM
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+  cancel-in-progress: true
+
+env:
+  EM_VERSION: 3.1.44
+  EM_CACHE_FOLDER: 'emsdk-cache'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8.6.6
+
+      - name: Set node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.11.1
+
+      - uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: ${{env.EM_VERSION}}
+          actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
