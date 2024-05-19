@@ -4,17 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "make && rollup --config rollup.config.ts --configPlugin typescript",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "devDependencies": {
-    "@types/node": "^20.12.12",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "eslint": "^8.57.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.9.1"
+    "rollup": "^4.17.2",
+    "rollup-plugin-copy": "^3.5.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2"
   }
 }
