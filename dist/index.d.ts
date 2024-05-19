@@ -111,6 +111,7 @@ declare class ZBarSymbol {
     quality: number;
     private constructor();
     static createSymbolsFromPtr(ptr: number, buf: ArrayBuffer): Array<ZBarSymbol>;
+    get rawData(): string;
     decode(encoding?: string): string;
 }
 

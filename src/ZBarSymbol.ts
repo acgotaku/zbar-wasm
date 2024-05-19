@@ -116,6 +116,12 @@ export class ZBarSymbol {
     return res;
   }
 
+  get rawData(): string {
+    return window.btoa(
+      String.fromCharCode(...new Uint8Array(this.data.buffer))
+    );
+  }
+
   decode(encoding?: string) {
     const decoder = new TextDecoder(encoding);
     return decoder.decode(this.data);
