@@ -1,7 +1,26 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { resolve } from 'node:path';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
+import { name } from './package.json';
 
-// https://vitejs.dev/config/
+const fileName = name;
+
 export default defineConfig({
-  plugins: [react()],
-})
+  build: {
+    // use vite library mode to build the package
+    // https://vitejs.dev/guide/build.html#library-mode
+    lib: {
+      entry: resolve(__dirname, 'src/main.ts'),
+      name: fileName,
+      formats: ['es'],
+      fileName: format => `${fileName}.${format}.js`
+    },
+    emptyOutDir: true
+  },
+  plugins: [
+    dts({
+      entryRoot: resolve(__dirname, 'src'),
+      logLevel: 'error'
+    })
+  ]
+});
